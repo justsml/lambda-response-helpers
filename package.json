@@ -1,6 +1,6 @@
 {
   "name": "lambda-response-helpers",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Lambda Helper functions.",
   "main": "build/index.js",
   "types": "build/index.d.ts",

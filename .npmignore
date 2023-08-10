@@ -1,0 +1,5 @@
+.tsbuildinfo
+tsconfig.json
+.nvmrc
+*.test.*
+index.ts
