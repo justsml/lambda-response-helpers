@@ -1,3 +1,52 @@
+class LambdaResponseClass {
+  _headers: Record<string, string> = {};
+  _statusCode: number = 200;
+  _body: unknown = undefined;
+
+  /**
+   * Set response headers.
+   * ## Example
+   * ```ts
+   * res()
+   *  .headers({
+   *   'content-type': 'application/json',
+   *  })
+   * .json({ message: 'Hello World!' });
+   * ```
+    */
+  headers = (headers: Record<string, string>): this => {
+    this._headers = headers;
+    return this;
+  }
+  
+  /** Set the status code */
+  status = (statusCode: number): this => {
+    this._statusCode = statusCode;
+    return this;
+  }
+
+  /** Set the body/payload */
+  body = (body: unknown): this => {
+    this._body = body;
+    return this;
+  }
+
+  /** Generate the response */
+  json = (body: unknown | undefined = undefined) => {
+    // Ensure that the Content-Type header is set to application/json
+    const headerKeys = Object.keys(this._headers);
+    // Prevent sending multiple headers (cased differently)
+    const contentTypeKey = headerKeys.find((key) => key.toLowerCase() === 'content-type');
+    this._headers[contentTypeKey ?? 'content-type'] = 'application/json';
+
+    return {
+      headers: this._headers,
+      statusCode: this._statusCode,
+      body: JSON.stringify(body ?? this._body),
+    };
+  }
+    
+}
 /**
  * A helper function to create a lambda HTTP response.
  *
@@ -23,58 +72,7 @@
  * ```
  */
 export const LambdaResponse = () => {
-  let _headers: Record<string, string> = {};
-  let _statusCode: number = 200;
-  let _body: unknown = undefined;
-
-  return {
-    /**
-     * Set response headers.
-     *
-     * ## Example
-     *
-     * ```ts
-     * res()
-     *   .headers({
-     *    'content-type': 'application/json',
-     *    'x-token': 'p@ssword123',
-     *  })
-     *  .json({ message: 'Hello World!' });
-     * ```
-     *
-     */
-    headers(headers: Record<string, string>) {
-      _headers = headers;
-      return this;
-    },
-
-    /** Set the status code */
-    status(statusCode: number) {
-      _statusCode = statusCode;
-      return this;
-    },
-
-    /** Set the body/payload */
-    body(body: unknown) {
-      _body = body;
-      return this;
-    },
-
-    /** Generate the response */
-    json(body: unknown | undefined = undefined) {
-      // Ensure that the Content-Type header is set to application/json
-      const headerKeys = Object.keys(_headers);
-      // Prevent sending multiple headers (cased differently)
-      const contentTypeKey = headerKeys.find((key) => key.toLowerCase() === 'content-type');
-      _headers[contentTypeKey ?? 'content-type'] = 'application/json';
-
-      return {
-        headers: _headers,
-        statusCode: _statusCode,
-        body: JSON.stringify(body ?? _body),
-      };
-    },
-  };
+  return new LambdaResponseClass();
 };
 
 /** An easy alias for `LambdaResponse` */

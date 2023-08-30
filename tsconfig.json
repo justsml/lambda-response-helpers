@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "composite": true,
-    "tsBuildInfoFile": "./.tsbuildinfo",
+    // "incremental": true,
+    // "composite": true,
+    // "tsBuildInfoFile": "./.tsbuildinfo",
     "target": "es2020",
     "moduleDetection": "auto",
     "module": "commonjs",
@@ -14,7 +14,7 @@
     "checkJs": false,
     "declaration": true,
     "declarationMap": true,
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "outDir": "./build",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

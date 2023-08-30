@@ -1,10 +1,10 @@
 {
   "name": "lambda-response-helpers",
-  "version": "1.0.3",
-  "description": "Lambda Helper functions.",
+  "version": "1.1.0",
+  "description": "Lambda Response Helper functions.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "engineStrict": true,
+  "engineStrict": false,
   "engines": {
     "node": ">=18.17.0"
   },
@@ -24,9 +24,6 @@
     "url": "https://danlevy.net"
   },
   "license": "MIT",
-  "peerDependencies": {
-    "knex": "^2.5.1"
-  },
   "devDependencies": {
     "prettier": "^3.0.1",
     "ts-node": "^10.9.1",
